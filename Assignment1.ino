@@ -16,11 +16,13 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  //Check whether buttons are pressed
   BUTTON1state = digitalRead(22);
   BUTTON2state = digitalRead(23);
 
   if (BUTTON1state == HIGH){
     //1 = disable stream of pulses
+    //Turn off LEDs
     digitalWrite(21,LOW);
     digitalWrite(15,LOW);
   } 
