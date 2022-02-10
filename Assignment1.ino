@@ -1,3 +1,8 @@
+#define LED1 15
+#define LED2 21
+#define BUTTON1 22
+#define BUTTON2 23
+
 //Global Variables
 int a = 1200;
 int b = 900;
@@ -11,12 +16,12 @@ void setup() {
   Serial.begin(115200);//Used to show what the program is doing
   
   //For the LEDs set as output
-  pinMode(15,OUTPUT);
-  pinMode(21,OUTPUT);
+  pinMode(LED1,OUTPUT);
+  pinMode(LED2,OUTPUT);
   
   //For the buttons set as input
-  pinMode(22,INPUT);
-  pinMode(23,INPUT);
+  pinMode(BUTTON1,INPUT);
+  pinMode(BUTTON2,INPUT);
   
 }
 
@@ -26,16 +31,16 @@ void loop() {
   
   
   //Check whether buttons are pressed
-  int BUTTON1state = digitalRead(22);
-  int BUTTON2state = digitalRead(23);
+  int BUTTON1state = digitalRead(BUTTON1);
+  int BUTTON2state = digitalRead(BUTTON2);
 
   if (BUTTON1state == HIGH){
     //1 = disable stream of pulses
   
     Serial.println("Button1 High");
      //Turn off LEDs
-    digitalWrite(21,LOW);
-    digitalWrite(15,LOW);
+    digitalWrite(LED1,LOW);
+    digitalWrite(LED2,LOW);
   } 
   else{
     Serial.println("Button1 Low");
@@ -46,17 +51,17 @@ void loop() {
        //Generate inverted form of complete Sig A waveform (from the largest pulse to the shortest)until switch 2 set back to 0
 
        //Sig B
-       digitalWrite(21,HIGH);//Send HIGH signal, turn LED on
+       digitalWrite(LED2,HIGH);//Send HIGH signal, turn LED on
        delayMicroseconds(20000);//50 Hz = 20000 µs
-       digitalWrite(21,LOW);//Send LOW signal, turn LED off
+       digitalWrite(LED2,LOW);//Send LOW signal, turn LED off
        
        int i = 0;//Counter
        a = 2050;//Reset a
        while (i <= c){ //Do 17 times
           //Sig A
-          digitalWrite(15,HIGH);
+          digitalWrite(LED1,HIGH);
           delayMicroseconds(a);
-          digitalWrite(15,LOW);
+          digitalWrite(LED1,LOW);
           delayMicroseconds(b);
           a = a - 50;//Decrement a
           i++;//Increment Counter
@@ -68,17 +73,17 @@ void loop() {
       //0 = run as normal mode
 
       //Sig B
-      digitalWrite(21,HIGH);
+      digitalWrite(LED2,HIGH);
       delayMicroseconds(50);
-      digitalWrite(21,LOW);
+      digitalWrite(LED2,LOW);
       
       int i = 0;//Counter 
       a = 1200;//Reset a
       while (i <= c){ //Do 17 times
         //Sig A
-        digitalWrite(15,HIGH);
+        digitalWrite(LED1,HIGH);
         delayMicroseconds(a);
-        digitalWrite(15,LOW);
+        digitalWrite(LED1,LOW);
         delayMicroseconds(b);
         a = a + 50;//Increment a
         i++;//Increment Counter
