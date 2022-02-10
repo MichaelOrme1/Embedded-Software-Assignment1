@@ -1,33 +1,39 @@
+//Global Variables
 int a = 1200;
 int b = 900;
 int c = 17;
 int d = 2500;
-int BUTTON1state = 0;
-int BUTTON2state = 0;
+
 
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(115200);//Used to show what the program is doing
+  
+  //For the LEDs set as output
   pinMode(15,OUTPUT);
   pinMode(21,OUTPUT);
+  
+  //For the buttons set as input
   pinMode(22,INPUT);
   pinMode(23,INPUT);
   
 }
 
+
 void loop() {
   // put your main code here, to run repeatedly:
+  
+  
   //Check whether buttons are pressed
-  Serial.println("Start");
-
-  BUTTON1state = digitalRead(22);
-  BUTTON2state = digitalRead(23);
+  int BUTTON1state = digitalRead(22);
+  int BUTTON2state = digitalRead(23);
 
   if (BUTTON1state == HIGH){
     //1 = disable stream of pulses
-    //Turn off LEDs
+  
     Serial.println("Button1 High");
+     //Turn off LEDs
     digitalWrite(21,LOW);
     digitalWrite(15,LOW);
   } 
@@ -40,9 +46,9 @@ void loop() {
        //Generate inverted form of complete Sig A waveform (from the largest pulse to the shortest)until switch 2 set back to 0
 
        //Sig B
-       digitalWrite(21,HIGH);
-       delayMicroseconds(50);
-       digitalWrite(21,LOW);
+       digitalWrite(21,HIGH);//Send HIGH signal, turn LED on
+       delayMicroseconds(20000);//50 Hz = 20000 µs
+       digitalWrite(21,LOW);//Send LOW signal, turn LED off
        
        int i = 0;//Counter
        a = 2050;//Reset a
