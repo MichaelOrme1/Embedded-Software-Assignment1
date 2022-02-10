@@ -74,7 +74,7 @@ void loop() {
 
       //Sig B
       digitalWrite(LED2,HIGH);
-      delayMicroseconds(50);
+      delayMicroseconds(20000);//50 Hz = 20000 µs
       digitalWrite(LED2,LOW);
       
       int i = 0;//Counter 
